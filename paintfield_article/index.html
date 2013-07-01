@@ -1,0 +1,379 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>お絵描きソフト「PaintField」の開発 &mdash; お絵描きソフト「PaintField」の開発</title>
+    
+    <link rel="stylesheet" href="_static/pyramid.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="お絵描きソフト「PaintField」の開発" href="#" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+  </head>
+  <body>
+
+    <div class="related">
+      <h3>ナビゲーション</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="総合索引"
+             accesskey="I">索引</a></li>
+        <li><a href="#">お絵描きソフト「PaintField」の開発</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="paintfield">
+<h1>お絵描きソフト「PaintField」の開発<a class="headerlink" href="#paintfield" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<div class="line-block">
+<div class="line">&#64;seanchas_t (<a class="reference external" href="https://twitter.com/seanchas_t">https://twitter.com/seanchas_t</a>)</div>
+<div class="line">2013年6月29日</div>
+</div>
+<div class="section" id="id1">
+<h2>概要<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>「PaintField」という、</p>
+<ul class="simple">
+<li>使いやすいユーザーインターフェース</li>
+<li>クロスプラットフォーム (Mac, Linux, Windows対応)</li>
+<li>オープンソース (LGPL)</li>
+<li>拡張性の高い設計</li>
+</ul>
+<p>これらを掲げた、（主にペンタブレットを使用する）お絵描きソフトを開発した。</p>
+<p>現在、Webサイト (<a class="reference external" href="http://iofg2100.github.io/PaintField">http://iofg2100.github.io/PaintField</a>) にて公開中である。</p>
+<p>また、GitHub (<a class="reference external" href="https://github.com/iofg2100/PaintField">https://github.com/iofg2100/PaintField</a>) にて開発を行なっている。</p>
+<p>現在の主な機能として、以下のものがある。</p>
+<ul class="simple">
+<li>ペンタブレットに適したシンプルなブラシ（高機能なブラシは今後開発予定）</li>
+<li>テキスト、長方形、楕円をつくる（これらはベクターデータなので後から編集が可能）</li>
+<li>レイヤーの木構造</li>
+<li>無限の取り消し・やり直し</li>
+<li>各ファイルごとのタブ</li>
+<li>タブエリアを水平、垂直に分割する</li>
+<li>１つのファイルに対して複数のビューを持てる</li>
+</ul>
+<div class="figure">
+<img alt="_images/demoshot.jpg" src="_images/demoshot.jpg" style="width: 100%;" />
+<p class="caption">Fig. スクリーンショット</p>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>来歴<a class="headerlink" href="#id2" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<ul class="simple">
+<li>2011年1月 開発開始</li>
+<li>2013年1月 初のバイナリ版リリース</li>
+<li>現在のバージョン: 0.0.6</li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h2>動機<a class="headerlink" href="#id3" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<ul class="simple">
+<li>Mac用でフリーのお絵描きソフトで、ペンタブを使ってのお絵描きがしやすいソフトがなかった</li>
+<li>せっかくなら、クロスプラットフォーム・オープンソースで作ってしまおう</li>
+<li>プログラミングの勉強にもなる</li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h2>開発<a class="headerlink" href="#id4" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>PaintField の開発には以下のものを使った。</p>
+<dl class="docutils">
+<dt>GUI ツールキット</dt>
+<dd>Qt</dd>
+<dt>言語</dt>
+<dd>C++ (11)</dd>
+</dl>
+<div class="section" id="gui">
+<h3>GUI ツールキットについて<a class="headerlink" href="#gui" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>GUI ツールキットとは、GUIを扱うためのライブラリ・環境であり、PaintFieldのようなGUIアプリを開発するときに必要である。</p>
+<p>GUIツールキットの例:</p>
+<ul class="simple">
+<li>Windowsの様々なAPI(Windows API, MFC, Windows Forms, WPFなど…、詳細は調べていない)</li>
+<li>Cocoa (Objective-C, Mac)</li>
+</ul>
+<p>クロスプラットフォームのもの:</p>
+<ul class="simple">
+<li>Qt (C++)</li>
+<li>wxWidgets (C++)</li>
+<li>GTK+ (C)</li>
+<li>Swing (Java)</li>
+</ul>
+<p>など</p>
+<p>PaintFieldでは、Qtを使用している。</p>
+</div>
+<div class="section" id="qt">
+<h3>Qtを選んだ理由<a class="headerlink" href="#qt" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<ul>
+<li><p class="first">オープンソース(LGPL)</p>
+</li>
+<li><p class="first">クロスプラットフォーム</p>
+<p>GTK+もオープンソースでクロスプラットフォームだが、Qtの方がMac上で安定的に動作する。</p>
+</li>
+<li><p class="first">企業にサポートされている</p>
+<p>Digia社 (以前はNokia)</p>
+</li>
+<li><p class="first">C++なので速い</p>
+<p>スムーズなお絵描き、操作感のために、実行速度の高い言語である必要がある。</p>
+</li>
+<li><p class="first">C++の標準ライブラリより簡単なC++のクラス（リストや文字列など）が用意されているので、C++の難しさが軽減される</p>
+<p>例えば、QList, QHash, QStringなどは、組み込み型と同じように値で取り扱っても問題がない。
+(内部でコピーオンライトになっている)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>内部構造<a class="headerlink" href="#id5" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="figure">
+<img src="_images/architecture.svg" width="100%" /><p class="caption">Fig. PaintFieldの構造 (クラス図)</p>
+</div>
+<ul>
+<li><p class="first">AppController</p>
+<p>アプリケーション全体を管理するオブジェクト。
+アプリケーションの設定、Extension Factory（後述するExtensionを作るFactory）の管理なども行う。</p>
+</li>
+<li><p class="first">Workspace</p>
+<p>ワークスペース（各トップレベルウィンドウ）を管理するオブジェクト。
+各サイドバー、ツールバー、メニューバーなどがここに属する。</p>
+</li>
+<li><p class="first">Canvas</p>
+<p>キャンバス（各ファイルの編集画面）を管理するオブジェクト。</p>
+</li>
+<li><p class="first">Document</p>
+<p>書類。Canvasは1つのDocumentを参照する。Documentは複数のCanvasから参照されることが可能である。</p>
+</li>
+<li><p class="first">Extension</p>
+<p>いわゆる拡張機能である。</p>
+<p>AppExtension, WorkspaceExtension, CanvasExtension の3種類があり、
+それぞれ、AppController, Workspace, Canvasがつくられるときに一緒につくられる。</p>
+<p>Tool、サイドバー、メニューバーのアクションなどを提供し、機能を追加する。</p>
+<p>これを新たに書くことで、機能を楽に追加することができる。</p>
+</li>
+<li><p class="first">ExtensionFactory</p>
+<p>Extensionを必要に応じて作る。
+Extensionとセットで実装する。</p>
+</li>
+<li><p class="first">Tool</p>
+<p>ツールバーから選択できる、ブラシ、レイヤーの移動などのツールである。
+各Canvasごとに作られる。
+Canvasが受け取る入力イベント（タブレットのイベントなど）を肩代わりして、Documentに編集を行う。
+また、Canvasのレンダリングも一部肩代わりする。</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id6">
+<h2>PaintFieldに予め含まれる拡張機能の例<a class="headerlink" href="#id6" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<ul>
+<li><p class="first">BrushTool</p>
+<p>ブラシ関連の機能・ツールを提供している。</p>
+</li>
+<li><p class="first">VectorTools</p>
+<p>ベクターデータ関連のツール・機能を提供している。</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id7">
+<h2>画像フォーマット<a class="headerlink" href="#id7" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>PaintFieldは、各チャンネルが32bit floatのARGB画像フォーマットを使っている。</p>
+<p>一般的に、画像データは、各チャンネル8bit unsigned intで表すことが多いが、
+編集時に誤差が大きくなったり、計算の実装がしにくかったりする（これは、色の範囲が0-1ではなく0-255であるため）。</p>
+<p>一方、floatは、編集時の誤差が少なく出来、計算の処理が実装しやすい。</p>
+</div>
+<div class="section" id="sse">
+<h2>SSE命令による演算の高速化<a class="headerlink" href="#sse" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>x86系CPUには、SSEという、SIMD演算（Single Instruction Multiple Data、1回の命令で複数のデータを演算すること）用命令セットがある。
+例えば、32bit floatであれば、1度に4つのデータを同時に演算できる。</p>
+<p>類似したものに、ARMのNEONなどがある。</p>
+<p>通常はこれを意識してプログラミングで使うことはないが、使用すると演算が高速化できる。</p>
+<p>PaintFieldは、各チャンネルがfloatのARGB画像フォーマットを使っているので、SSE命令と相性が良い。</p>
+<div class="section" id="ssec">
+<h3>SSE命令をC++で使う例<a class="headerlink" href="#ssec" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<div class="code c++ highlight-python"><pre>#include &lt;emmintrin.h&gt;
+#include &lt;iostream&gt;
+#include &lt;array&gt;
+
+union vecf4
+{
+  __v4sf v; // __v4sfは、float*4のベクトル演算用の型
+  std::array&lt;float, 4&gt; f;
+};
+
+int main()
+{
+  vecf4 a, b;
+  a.f = {1, 2, 3, 4};
+  b.f = {5, 6, 7, 8};
+
+  vecf4 c;
+  c.v = a.v * b.v;
+  // SSEのベクトル演算が行われる
+  // c = {5, 12, 21, 32}
+
+  vecf4 d;
+  d.v = __builtin_ia32_sqrtps(c.v);
+  // SSEのsqrtps命令（平方根を計算する）を関数のように呼び出す
+  // d = {2.23607 3.4641 4.58258 5.65685}
+
+  for (float f : c.f)
+    std::cout &lt;&lt; f &lt;&lt; " ";
+  std::cout &lt;&lt; std::endl;
+
+  for (float f : d.f)
+    std::cout &lt;&lt; f &lt;&lt; " ";
+  std::cout &lt;&lt; std::endl;
+
+  return 0;
+}</pre>
+</div>
+</div>
+</div>
+<div class="section" id="id8">
+<h2>レイヤーの画像データの扱い<a class="headerlink" href="#id8" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="figure">
+<img src="_images/tiledsurface.svg" width="25%" /><p class="caption">Fig. レイヤーの例 (斜線部分のみデータが確保される)</p>
+</div>
+<p>PaintFieldのラスターレイヤーでは、画像を64*64という小さいサイズに分割して、必要な部分にのみそれを割り当てている。</p>
+<p>この方法には様々な利点がある。</p>
+<ul>
+<li><p class="first">レイヤーのサイズが無限大に出来る</p>
+</li>
+<li><p class="first">必要最低限のメモリ使用量で済む</p>
+</li>
+<li><p class="first">参照の局所性が保たれる</p>
+<p>ブラシで描き込むときなどに、分割された小さい画像データを扱うので、
+大きな画像データを扱うのに比べ、アクセスするメモリ領域が小さく済む（これを参照の局所性という）。</p>
+<p>これによって、キャッシュヒット率が上がりパフォーマンスが向上する。</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id9">
+<h2>ブラシ<a class="headerlink" href="#id9" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>PaintFieldのブラシの描画では、２種類の方法を採用している。</p>
+<ul>
+<li><p class="first">1px間隔で円を順番に描画していく方式 (Simple Brush)</p>
+<p>描画量が少ない時にパフォーマンスが有利。</p>
+</li>
+<li><p class="first">ベクターデータを生成して描画していく方式 (Pen)</p>
+<p>描画量が多い (長距離を描画する) 時にパフォーマンスが有利。</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id10">
+<h2>曲線補間<a class="headerlink" href="#id10" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="figure">
+<img src="_images/bspline.svg" width="25%" /><p class="caption">Fig. B-Spline補間の例</p>
+</div>
+<p>PaintFieldのブラシは、曲線補間のオンオフができる。</p>
+<p>ペンタブレットからの入力イベントは、7.5ms毎 (Wacom Bamboo Comic CTH-661の場合) に送られてくるので、曲線補間が無くてもほぼ十分な情報量があるが、
+より綺麗に描きたい場合、マウスで描く場合には、曲線補間が必要である。</p>
+<p>PaintFieldの曲線補間は、3次のB-Spline補間である。4点から、2点目と3点目の間の曲線補間を割り出す。</p>
+<p>同様の方式に、Catmull-Rom補間がある。Catmull-Rom補間は与えられた点を通るのに対し、B-Spline補間は通らず、よりなめらかな曲線を出力する。</p>
+<p>また、3次のB-Spline補間も、Catmull-Rom補間も、3次のパラメトリック曲線なので、
+同様に3次のパラメトリック曲線であるベジエ曲線に変換することが可能である (src/libs/Malachite/src/curves.hを参照せよ)。</p>
+</div>
+<div class="section" id="id11">
+<h2>描画ライブラリ<a class="headerlink" href="#id11" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>Qtの描画エンジンは、floatの画像に対応していないため、PaintFieldでは、Malachite (<a class="reference external" href="https://github.com/iofg2100/Malachite">https://github.com/iofg2100/Malachite</a>)という自作の2D描画ライブラリを使用している。
+ベジエ曲線、グラデーションなどの描画が可能である。</p>
+<p>ラスタライザには、Anti-Grain Geometry (<a class="reference external" href="http://www.antigrain.com/">http://www.antigrain.com/</a>) を使用している。</p>
+</div>
+<div class="section" id="id12">
+<h2>今後の課題<a class="headerlink" href="#id12" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>PaintFieldはお絵描きソフトとして機能が不完全な部分も多く (選択範囲、高機能なブラシ、フィルタなどが欠けている) 、
+さらなる機能の追加が必要である。</p>
+<p>また、コードが文書化されていない (コメントも少ない) ので、他の人が開発に参加するのが難しい。
+せっかくオープンソースでGitHubで開発しているので、多数の人が開発に参加できるような状態にしていきたい。</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">目次</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">お絵描きソフト「PaintField」の開発</a><ul>
+<li><a class="reference internal" href="#id1">概要</a></li>
+<li><a class="reference internal" href="#id2">来歴</a></li>
+<li><a class="reference internal" href="#id3">動機</a></li>
+<li><a class="reference internal" href="#id4">開発</a><ul>
+<li><a class="reference internal" href="#gui">GUI ツールキットについて</a></li>
+<li><a class="reference internal" href="#qt">Qtを選んだ理由</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id5">内部構造</a></li>
+<li><a class="reference internal" href="#id6">PaintFieldに予め含まれる拡張機能の例</a></li>
+<li><a class="reference internal" href="#id7">画像フォーマット</a></li>
+<li><a class="reference internal" href="#sse">SSE命令による演算の高速化</a><ul>
+<li><a class="reference internal" href="#ssec">SSE命令をC++で使う例</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id8">レイヤーの画像データの扱い</a></li>
+<li><a class="reference internal" href="#id9">ブラシ</a></li>
+<li><a class="reference internal" href="#id10">曲線補間</a></li>
+<li><a class="reference internal" href="#id11">描画ライブラリ</a></li>
+<li><a class="reference internal" href="#id12">今後の課題</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>クイック検索</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="検索" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    モジュール、クラス、または関数名を入力してください
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>ナビゲーション</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="総合索引"
+             >索引</a></li>
+        <li><a href="#">お絵描きソフト「PaintField」の開発</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, seanchas_t.
+      このドキュメントは <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3 で生成しました。
+    </div>
+  </body>
+</html>
