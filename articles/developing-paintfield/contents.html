@@ -9,8 +9,8 @@
     
     <title>概要 &mdash; お絵描きソフト「PaintField」の開発</title>
     
-    <link rel="stylesheet" href="_static/pyramid.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="static/pyramid.css" type="text/css" />
+    <link rel="stylesheet" href="static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -21,16 +21,16 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/translations.js"></script>
+    <script type="text/javascript" src="static/jquery.js"></script>
+    <script type="text/javascript" src="static/underscore.js"></script>
+    <script type="text/javascript" src="static/doctools.js"></script>
+    <script type="text/javascript" src="static/translations.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="お絵描きソフト「PaintField」の開発" href="index.html" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <!--[if lte IE 6]>
-<link rel="stylesheet" href="_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="static/ie6.css" type="text/css" media="screen" charset="utf-8" />
 <![endif]-->
 
   </head>
@@ -74,7 +74,7 @@
 <li>１つのファイルに対して複数のビューを持てる</li>
 </ul>
 <div class="figure">
-<img alt="_images/demoshot.jpg" src="_images/demoshot.jpg" style="width: 100%;" />
+<img alt="images/demoshot.jpg" src="images/demoshot.jpg" style="width: 100%;" />
 <p class="caption">Fig. スクリーンショット</p>
 </div>
 </div>
@@ -145,7 +145,7 @@
 <div class="section" id="id5">
 <h1>内部構造<a class="headerlink" href="#id5" title="このヘッドラインへのパーマリンク">¶</a></h1>
 <div class="figure">
-<img src="_images/architecture.svg" width="100%" /><p class="caption">Fig. PaintFieldの構造 (クラス図)</p>
+<img src="images/architecture.svg" width="100%" /><p class="caption">Fig. PaintFieldの構造 (クラス図)</p>
 </div>
 <ul>
 <li><p class="first">AppController</p>
@@ -250,7 +250,7 @@ int main()
 <div class="section" id="id7">
 <h1>レイヤーの画像データの扱い<a class="headerlink" href="#id7" title="このヘッドラインへのパーマリンク">¶</a></h1>
 <div class="figure">
-<img src="_images/tiledsurface.svg" width="25%" /><p class="caption">Fig. レイヤーの例 (斜線部分のみデータが確保される)</p>
+<img src="images/tiledsurface.svg" width="25%" /><p class="caption">Fig. レイヤーの例 (斜線部分のみデータが確保される)</p>
 </div>
 <p>PaintFieldのラスターレイヤーでは、画像を64*64という小さいサイズに分割して、必要な部分にのみそれを割り当てている。</p>
 <p>この方法には様々な利点がある。</p>
@@ -281,7 +281,7 @@ int main()
 <div class="section" id="id9">
 <h1>曲線補間<a class="headerlink" href="#id9" title="このヘッドラインへのパーマリンク">¶</a></h1>
 <div class="figure">
-<img src="_images/bspline.svg" width="25%" /><p class="caption">Fig. B-Spline補間の例</p>
+<img src="images/bspline.svg" width="25%" /><p class="caption">Fig. B-Spline補間の例</p>
 </div>
 <p>PaintFieldのブラシは、曲線補間のオンオフができる。</p>
 <p>ペンタブレットからの入力イベントは、7.5ms毎 (CTH-661の場合) に送られてくるので、曲線補間が無くてもほぼ十分な情報量があるが、
