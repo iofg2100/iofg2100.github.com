@@ -1,13 +1,15 @@
 body {
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 300;
   background-color: #ECEAEA;
 }
 .title {
   font-size: 30px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
   color: #000000;
 }
 .text {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
   color: #000000;
 }
 .item {
@@ -16,6 +18,8 @@ body {
   border-left: 0px solid;
   padding-left: 20px;
   border-color: #CC6666;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
   color: #000000;
 }
 a:hover {
@@ -39,6 +43,9 @@ li {
   padding: 10px;
 }
 .copyright {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  color: #000000;
   font-size: 12px;
   text-color: #000000;
   padding-top: 20px;
